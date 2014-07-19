@@ -1,15 +1,16 @@
-## based heavily on makeVector and cachemean from Assignment 2 description
-## code adjusted to take the inverse of a matrix rather than the mean of a vector
-## "m" and "mean" variables changed to "inverse.cache" and "inverse"
+## functions for cacheing the computed inverse of a matrix
+## based heavily on makeVector and cachemean from the Assignment 2 description
+## "m" and "mean" variables changed to "inverse.cache" and "inverse" respectively
 
-## returns functions that set/retrieve matrix (x) and its inverse (inverse.cache)
-## x and inverse.cache are "private" variables
-## i.e. they exist only within the environment defined by makeCacheMatrix
+## makeCacheMatrix takes a matrix 'x' as an argument
+## 'x' and 'inverse.cache' (stores inverse of 'x') are "private" variables
+## i.e. they exist only in the environment defined by makeCacheMatrix
+## makeCacheMatrix returns list of functions for setting or retrieving them
 
 makeCacheMatrix <- function(x = matrix()) {
   inverse.cache <- NULL
   set <- function(y) {
-    x <<- y # <<- sets x and inverse.cache in parent (makeCacheMatrix) environment
+    x <<- y # '<<-' sets x and inverse.cache in parent (makeCacheMatrix) environment
     inverse.cache <<- NULL
   }
   get <- function() x
@@ -21,7 +22,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 ## cacheSolve takes list defined by makeCacheMatrix as input
-## calls functions therein to set and/or retrieve inverse.cache variable
+## calls functions therein to set and/or retrieve inverse.cache
 
 cacheSolve <- function(x, ...) {
   inverse <- x$get.inverse()
